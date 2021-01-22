@@ -10,10 +10,13 @@ con.connect();//链接
 
 /* 注册 */
 router.post('/register', function(req, res, next) {
-  var pretty = JSON.parse(obj);
-  con.query('insert into mote_style values(?,?,?,?,?)',[pretty.id,pretty.index,pretty.index2,pretty.index3,pretty.color],(err, result) => {
+  var u = JSON.parse(obj);
+  con.query('insert into Users values(?,?,?,?,?)',[u.userId,u.userName,u.userPwd,u.userTel,u.userEmail,u.userProCity,u.userIntro,u.userScore,u.userImg,u.userState,u.userGender,u.userAge],(err, result) => {
       if(err){
         console.log(err);
+      }
+      else{
+        console.log('插入数据成功')
       }
     })     
   res.end(); 
