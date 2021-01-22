@@ -48,4 +48,8 @@ app.get('/', (req, res, next) => {
   console.log(Object.keys(res))
   res.send('Hello World')
 })
+<<<<<<< HEAD
+=======
+
+>>>>>>> 58c49ade220323786313330ebb5e90492f3888a4
 module.exports = app;
