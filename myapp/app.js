@@ -49,7 +49,4 @@ app.get('/', (req, res, next) => {
   res.send('Hello World')
 })
 
-app.listen(port, () => {
-  console.log(`express server start at http://localhost:${port}`)
-})
 module.exports = app;
