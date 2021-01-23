@@ -21,5 +21,32 @@ router.post('/register', function(req, res, next) {
     })     
   res.end(); 
 })
-
+/* 登陆 */
+router.post('/login', function(req, res, next) {
+  // var u = JSON.parse(obj);
+  var u  = req.body.userId;
+  con.query("select * from Users where userName =?;",[u],function(err,result){
+      if(err){
+        console.log(err);
+      }else{
+        console.log(result)
+        res.send(result);
+      }
+     })
+  res.end(); 
+})
+/* 认证 */
+router.post('/authentication', function(req, res, next) {
+  // var u = JSON.parse(obj);
+  // var u  = req.body.userId;
+  // con.query("select * from Users where userName =?;",[u],function(err,result){
+  //     if(err){
+  //       console.log(err);
+  //     }else{
+  //       console.log(result)
+  //       res.send(result);
+  //     }
+  //    })
+  // res.end(); 
+})
 module.exports = router;
