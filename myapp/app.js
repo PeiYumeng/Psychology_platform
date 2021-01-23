@@ -7,8 +7,20 @@ var cors=require("cors");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var app = express();
+var fs=require('fs');
+var https=require('https');
 
+var privateKey=fs.readFileSync('./3745209_magiskq.top.key'); 此处是你的ssl证书文件
+var certificate=fs.readFileSync('./3745209_magiskq.top.pem'); 此处是你的ssl证书文件
+var credentials= {key:privateKey,cert:certificate};
+
+var httpsPort = "3000"
+var httpsServer = https.createServer(credentials,app);
+httpsServer.listen(httpsPort,'0.0.0.0');
+
+
+var app = express();
+var server = app.listen(8080);
 // view engine setup
 // app.set('views')用来指明视图文件所在目录
 app.set('views', path.join(__dirname, 'views'));
@@ -48,5 +60,9 @@ app.get('/', (req, res, next) => {
   console.log(Object.keys(res))
   res.send('Hello World')
 })
-
+//app.listen(3000,(err)=>{
+  //if (!err) console.log('服务器启动成功了！')
+  //else console.log(err)
+//})
+//app.listen(8080)
 module.exports = app;
