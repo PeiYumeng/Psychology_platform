@@ -1,0 +1,2 @@
+npm install antd --save
+npm install antd-img-crop --save 
