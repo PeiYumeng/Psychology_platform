@@ -19,10 +19,8 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-  
     margin-bottom: 24px;
     padding: 24px;
-    color: #fff;
   }
   
   .suf-subscription > p {
@@ -50,6 +48,30 @@
     margin-bottom: 25px;
     border: 1px solid #fff;
   }
+
+  .suf-input-first {
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin-right: 10px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    margin-top:10px;
+    margin-bottom: 25px;
+    border: 1px solid #fff;
+  }
+
+  .suf-input2 {
+    padding: 8px 20px;
+    border-radius: 4px;
+    margin-right: 10px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    margin-bottom: 25px;
+    border: 1px solid #fff;
+    width: 125px;
+  }
   
   .suf-select {
     padding: 8px 22px;
@@ -60,6 +82,12 @@
     font-size: 18px;
     margin-bottom: 25px;
     border: 1px solid #fff;
+  }
+
+  .avatar-uploader {
+    width: 50000px;
+    height: 500000px;
+
   }
   
   .suf-links {
@@ -154,12 +182,21 @@
     margin-bottom: 16px;
   }
   
+  .avatar-uploader > .ant-upload {
+    width: 128px;
+    height: 128px;
+  }
+
   @media screen and (max-width: 820px) {
     .suf-links {
       padding-top: 2rem;
     }
   
     .suf-input {
+      width: 100%;
+    }
+
+    .suf-input2 {
       width: 100%;
     }
 

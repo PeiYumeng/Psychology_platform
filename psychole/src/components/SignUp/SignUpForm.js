@@ -2,9 +2,14 @@ import React, { useState, useEffect } from 'react';
 import './SignUpForm.css';
 import { Button } from '../Button';
 import CitySelector from './CitySelector';
+import Avatar from './Avatar';
 import { Link } from 'react-router-dom';
+import logo_hei from '../../images/logo_hei.jpg';
+import girl from '../../images/girl.jpg';
+import boy from '../../images/boy.jpg';
 
 function SignUpForm() {
+    const [signUpURL, setSignUpURL] = useState('http://132.232.126.211:8080/register');
     const [userId, setUserId] = useState('');
     const [userName, setUserName] = useState('');
     const [userPwd, setUserPwd] = useState('');
@@ -13,22 +18,101 @@ function SignUpForm() {
     const [userProcity, setUserProcity] = useState('');
     const [userIntro, setUserIntro] = useState('');
     const [userScore, setUserScore] = useState('');
-    const [userImg, setUserImg] = useState('');
+    const [imgData, setImgData] = useState('');//头像的base64信息
+    const [userImg, setUserImg] = useState('');//数据库内头像名称
     const [userState, setUserState] = useState('');
     const [userGender, setUserGender] = useState('');
     const [userAge, setUserAge] = useState('');
     const [prov, setProv] = useState('');
     const [city, setCity] = useState('');
+    const [avatarDIY, setAvatarDIY] = useState(false);
+
+    const [fileList, setFileList] = useState([
+        {
+          uid: '-1',
+          name: 'image.png',
+          status: 'done',
+          url: logo_hei,
+        },
+      ]);
 
     const clickReg = () => {
-        console.log(userName);
-        console.log(userPwd);
-        console.log(userTel);
-        console.log(userProcity);
-    };
+        fetch(signUpURL, {
+            method: 'post', 
+            "Access-Control-Allow-Origin" : "*",
+            "Access-Control-Allow-Credentials" : true,
+            // credentials: 'include',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: JSON.stringify({userName: userName, userPwd: userPwd, userTel: userTel, userEmail: userEmail, userProcity: userProcity, userGender: userGender, userAge: userAge})
+            // body: JSON.stringify({userPho:this.state.userPho, 
+            //     userPwd:this.state.userPwd, userName:this.state.userName,
+            //     userSex:this.state.userSex, userCity:this.state.userCity,
+            //     userProvince:this.state.userProvince, 
+            //     picData:this.state.picData, userTime:month})
+          })
+            .then(res=>res.json())
+            .then(res=>{
+                {   
+                    setUserId(res[0]);
+                    console.log(res[0]);
+                }
+            });
+        
+        // console.log(userName);
+        // console.log(userPwd);
+        // console.log(userTel);
+        // console.log(userEmail);
+        // console.log(userProcity);
+        // console.log(userGender);
+        // console.log(userAge);
+        // console.log(userImg);
+    }
+
+
+    const genderChange = () => {
+        var index = document.getElementById('gender').selectedIndex;
+        setUserGender(document.getElementById('gender')[index].value);
+        if(avatarDIY==false){
+            if(document.getElementById('gender')[index].value=='男'){
+                setUserImg('boy.jpg');
+                setFileList([
+                    {
+                        uid: '-1',
+                        name: 'image.png',
+                        status: 'done',
+                        url: boy,
+                    },
+                ])
+            }
+            else if(document.getElementById('gender')[index].value=='女'){
+                setUserImg('girl.jpg');
+                setFileList([
+                    {
+                        uid: '-1',
+                        name: 'image.png',
+                        status: 'done',
+                        url: girl,
+                    },
+                ])
+            }
+            else{
+                setFileList([
+                    {
+                        uid: '-1',
+                        name: 'image.png',
+                        status: 'done',
+                        url: logo_hei,
+                    },
+                ])
+            }
+        }
+    }
+
 
     useEffect(() => {
-
+        
     }, []);
     
     return (
@@ -40,18 +124,33 @@ function SignUpForm() {
                     </p> */}
                     <div className='input-areas'>
                     <form>
-                        <input className='suf-input' id ='username' type='text' placeholder='用户名' onBlur={()=>{setUserName(document.getElementById('username').value)}}/>
+                        <Avatar fileList={fileList} setFileList={setFileList} setAvatarDIY={setAvatarDIY} setImgData={setImgData}/>
+                    </form>
+                    <form>
+                        <input className='suf-input-first' id ='username' type='text' placeholder='用户名' onBlur={()=>{setUserName(document.getElementById('username').value)}}/>
                     </form>
                     <form>
                         <input className='suf-input' id='password' type='password' placeholder='密码' onBlur={()=>{setUserPwd(document.getElementById('password').value)}}/>
                     </form>
                     <form>
-                        <input className='suf-input' id='phone' type='tel' placeholder='手机号' onBlur={()=>{setUserTel(document.getElementById('phone').value)}}/>
+                        <select className='suf-select' id='gender' onChange={genderChange}>
+                            <option>性别&nbsp;&nbsp;&nbsp;&nbsp;</option>
+                            <option>男</option>
+                            <option>女</option>
+                        </select>
+                        <input className='suf-input2' id='age' type='number' placeholder='年龄' onBlur={()=>{setUserAge(document.getElementById('age').value)}}/>
                     </form>
                     <CitySelector prov={prov} city={city} setProv={setProv} setCity={setCity} setUserProcity={setUserProcity}/>
                     <form>
+                        <input className='suf-input' id='phone' type='tel' placeholder='手机号' onBlur={()=>{setUserTel(document.getElementById('phone').value)}}/>
+                    </form>
+                    <form>
+                        <input className='suf-input' id='email' type='email' placeholder='邮箱' onBlur={()=>{setUserEmail(document.getElementById('email').value)}}/>
+                    </form>
+                    <form>
                         <Button buttonStyle='btn--outline' onClick={clickReg}>注册</Button>
                     </form>
+                    
                     </div>
                 </section>
             </div>
