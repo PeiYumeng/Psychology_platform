@@ -15,32 +15,23 @@ router.get('/images/:photo', function(req, res) {
 })
 /* 注册 */
 router.post('/register', function(req, res, next) {
-  //var u = JSON.parse(obj);
-  console.log(JSON.parse(JSON.stringify(req.body)));
-  var u = JSON.parse(JSON.stringify(req.body));
-  var id,img;
+  // var u = JSON.parse(Object.keys(JSON.parse(JSON.stringify(req.body)))[0]);
+  console.log(req.body);
+  var u = req.body;
+  var id;
   /* 生成id */
   con.query('select * from Users',(err, result) => {
     if(err){
       console.log(err);
     }
     else{
-      console.log(result);
       id = parseInt(result[result.length-1].userId) +1;
       /* 服务器生成图片 */
-      if(u.userImg != undefined){
-        var base64 = u.userImg.replace(/^data:image\/\w+;base64,/, "");
-        //var base64=u.userImg.base64[0].url.split(',')[1];
-        //var base64 = base_64_url.replace(/^data:image\/\w+;base64,/, ""); //去掉图片base64码前面部分data:image/png;base64
-        console.log(base64)
-        var data=new Date();
-        var img_name1=''+data.getFullYear()+data.getMonth()+data.getDate()+data.getHours()+data.getMinutes()+data.getSeconds();
-        var img_name=JSON.stringify(img_name1);
-        img=JSON.stringify(id+img_name);
-        console.log(img)
+      if(u.avatarDIY == true){
+        imgName = 'aaa.jpg';
+        var base64 = u.imgData.replace(/^data:image\/\w+;base64,/, "");
         //读取图片到服务端
-        var path='../images/'+img+'.jpg';
-        console.log(path);
+        var path='../images/'+imgName;
         var dataBuffer=Buffer.from(base64,'base64');
         fs.writeFile(path,dataBuffer,function(err){
             if(err){
@@ -49,9 +40,11 @@ router.post('/register', function(req, res, next) {
                 console.log('写入成功');
             }
         })
+      }else{
+        u.userGender == '女' ? imgName = 'girl.jpg' : imgName = 'boy.jpg'
       }
       /* 插入新用户 */
-      con.query('insert into Users values(?,?,?,?,?,?,?,?,?,?,?,?)',[JSON.stringify(id),u.userName,u.userPwd,u.userTel,u.userEmail,u.userProCity,u.userIntro,u.userScore,img,u.userState,u.userGender,u.userAge],(err, result) => {
+      con.query('insert into Users values(?,?,?,?,?,?,?,?,?,?,?,?)',[JSON.stringify(id),u.userName,u.userPwd,u.userTel,u.userEmail,u.userProcity,u.userIntro,100,imgName,0,u.userGender,21],(err, result) => {
           if(err){
             console.log(err);
           }
@@ -65,7 +58,7 @@ router.post('/register', function(req, res, next) {
 })
 /* 登陆 */
 router.post('/login', function(req, res, next) {
-  // var u = JSON.parse(obj);
+  var u = JSON.parse(obj);
   var u = JSON.parse(JSON.stringify(req.body));
   console.log(u);
   con.query("select * from Users where userId =?;",[u.userId],function(err,result){
@@ -76,7 +69,7 @@ router.post('/login', function(req, res, next) {
         res.send(result);
       }
      })
-  // res.end(); 
+  res.end(); 
 })
 /* 认证 */
 router.post('/authentication', function(req, res, next) {
@@ -93,3 +86,5 @@ router.post('/authentication', function(req, res, next) {
   // res.end(); 
 })
 module.exports = router;
+
+
