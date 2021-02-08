@@ -41,16 +41,20 @@ function SignUpForm() {
             method: 'post', 
             "Access-Control-Allow-Origin" : "*",
             "Access-Control-Allow-Credentials" : true,
-            // credentials: 'include',
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type': 'application/json;charset=UTF-8'
             },
-            body: JSON.stringify({userName: userName, userPwd: userPwd, userTel: userTel, userEmail: userEmail, userProcity: userProcity, userGender: userGender, userAge: userAge})
-            // body: JSON.stringify({userPho:this.state.userPho, 
-            //     userPwd:this.state.userPwd, userName:this.state.userName,
-            //     userSex:this.state.userSex, userCity:this.state.userCity,
-            //     userProvince:this.state.userProvince, 
-            //     picData:this.state.picData, userTime:month})
+            body: JSON.stringify({
+                "userName":userName,
+                "userPwd":userPwd,
+                "userTel":userTel,
+                "userEmail":userEmail,
+                "userProcity":userProcity,
+                "userGender":userGender,
+                "userAge":userAge,
+                "imgData":imgData,
+                "avatarDIY":avatarDIY,
+            })
           })
             .then(res=>res.json())
             .then(res=>{
@@ -59,15 +63,6 @@ function SignUpForm() {
                     console.log(res[0]);
                 }
             });
-        
-        // console.log(userName);
-        // console.log(userPwd);
-        // console.log(userTel);
-        // console.log(userEmail);
-        // console.log(userProcity);
-        // console.log(userGender);
-        // console.log(userAge);
-        // console.log(userImg);
     }
 
 

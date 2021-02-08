@@ -15,7 +15,6 @@ router.get('/images/:photo', function(req, res) {
 })
 /* 注册 */
 router.post('/register', function(req, res, next) {
-  // var u = JSON.parse(Object.keys(JSON.parse(JSON.stringify(req.body)))[0]);
   console.log(req.body);
   var u = req.body;
   var id;
@@ -28,7 +27,7 @@ router.post('/register', function(req, res, next) {
       id = parseInt(result[result.length-1].userId) +1;
       /* 服务器生成图片 */
       if(u.avatarDIY == true){
-        imgName = 'aaa.jpg';
+        imgName = u.userName+id+'.jpg';
         var base64 = u.imgData.replace(/^data:image\/\w+;base64,/, "");
         //读取图片到服务端
         var path='../images/'+imgName;
@@ -44,7 +43,7 @@ router.post('/register', function(req, res, next) {
         u.userGender == '女' ? imgName = 'girl.jpg' : imgName = 'boy.jpg'
       }
       /* 插入新用户 */
-      con.query('insert into Users values(?,?,?,?,?,?,?,?,?,?,?,?)',[JSON.stringify(id),u.userName,u.userPwd,u.userTel,u.userEmail,u.userProcity,u.userIntro,100,imgName,0,u.userGender,21],(err, result) => {
+      con.query('insert into Users values(?,?,?,?,?,?,?,?,?,?,?,?)',[JSON.stringify(id),u.userName,u.userPwd,u.userTel,u.userEmail,u.userProcity,u.userIntro,100,imgName,0,u.userGender,u.userAge*1],(err, result) => {
           if(err){
             console.log(err);
           }
