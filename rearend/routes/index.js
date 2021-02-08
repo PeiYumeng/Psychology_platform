@@ -15,7 +15,6 @@ router.get('/images/:photo', function(req, res) {
 })
 /* 注册 */
 router.post('/register', function(req, res, next) {
-  console.log(req.body);
   var u = req.body;
   var id;
   /* 生成id */
@@ -46,14 +45,15 @@ router.post('/register', function(req, res, next) {
       con.query('insert into Users values(?,?,?,?,?,?,?,?,?,?,?,?)',[JSON.stringify(id),u.userName,u.userPwd,u.userTel,u.userEmail,u.userProcity,u.userIntro,100,imgName,0,u.userGender,u.userAge*1],(err, result) => {
           if(err){
             console.log(err);
+            res.send('插入数据失败'); 
           }
           else{
             console.log('插入数据成功')
+            res.send('插入数据成功'); 
           }
         })   
      }
   })       
-  res.end(); 
 })
 /* 登陆 */
 router.post('/login', function(req, res, next) {
