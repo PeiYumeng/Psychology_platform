@@ -5,10 +5,10 @@ var dbconfig=require("../config/dbconfig.json");// 引入数据库配置连接�
 var optfile = require('./fs_read');
 const fs = require('fs');
 const http = require('http');
-var funcs = require('../utils/function.js');
+var funcs = require('./fonction.js');
 var con = mysql.createConnection(dbconfig);// 创建连接
 con.connect();//链接
-
+var io = require('socket.io');
 /* 显示图片*/
 router.get('/images/:photo', function(req, res) {
   var photo = req.params.photo;
