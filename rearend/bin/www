@@ -22,32 +22,11 @@ app.set('port', port);
  */
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
-// io.on('connection', function(socket){
-//   console.log('a user connected234');
-//   socket.emit('join', {username: 'ppp'});
-//   socket.on('disconnect', function(){
-//     console.log('user disconnected');
-//   });
-//   socket.on('join', ({ username, room }, callback) => {
-//     console.log(username);
-//     console.log('???')
-//   });
-// })
-var allClients = [];
 io.sockets.on('connection', function(socket) {
-   console.log('connect');
-   allClients.push(socket);
-   socket.on('NewPlayer', function(data1) {
-      // online = online + 1;
-      console.log('Online players : ');
-      console.log('New player connected : ');
-      // Players[data1] = data1;
-      // console.log(Players);
-  });
+   console.log(socket);
+   socket.emit('aaa','ppp')
    socket.on('disconnect', function() {
-      console.log('Got disconnect!');
-      // var i = allClients.indexOf(socket);
-      // allClients.splice(i, 1);
+    console.log('disconnect: ' + socket.id);
    });
 });
 /**
