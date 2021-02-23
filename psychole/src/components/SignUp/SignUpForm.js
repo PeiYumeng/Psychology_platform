@@ -37,32 +37,41 @@ function SignUpForm() {
       ]);
 
     const clickReg = () => {
-        fetch(signUpURL, {
-            method: 'post', 
-            "Access-Control-Allow-Origin" : "*",
-            "Access-Control-Allow-Credentials" : true,
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8'
-            },
-            body: JSON.stringify({
-                "userName":userName,
-                "userPwd":userPwd,
-                "userTel":userTel,
-                "userEmail":userEmail,
-                "userProcity":userProcity,
-                "userGender":userGender,
-                "userAge":userAge,
-                "imgData":imgData,
-                "avatarDIY":avatarDIY,
+        if(userName=='' || userPwd ==''){
+            alert('请填完信息再注册！');
+        }else{
+            fetch(signUpURL, {
+                method: 'post', 
+                "Access-Control-Allow-Origin" : "*",
+                "Access-Control-Allow-Credentials" : true,
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    "userName":userName,
+                    "userPwd":userPwd,
+                    "userTel":userTel,
+                    "userEmail":userEmail,
+                    "userProcity":userProcity,
+                    "userGender":userGender,
+                    "userAge":userAge,
+                    "imgData":imgData,
+                    "avatarDIY":avatarDIY,
+                })
             })
-          })
-            .then(res=>res.json())
-            .then(res=>{
-                {   
-                    setUserId(res[0]);
-                    console.log(res[0]);
-                }
-            });
+            .then(res => res.text()) // convert to plain text
+            .then(text => console.log(text)); // then log it out
+
+                // .then(res=>res.json())
+                // .then(res=>{
+                //     {   
+                //         setUserId(res[0]);
+                //         console.log(res[0]);
+                //     }
+                // });
+            alert('注册成功！\n点击"确认"进入登陆界面~');
+            window.location.href="/log-in";
+        }
     }
 
 
@@ -143,7 +152,9 @@ function SignUpForm() {
                         <input className='suf-input' id='email' type='email' placeholder='邮箱' onBlur={()=>{setUserEmail(document.getElementById('email').value)}}/>
                     </form>
                     <form>
-                        <Button buttonStyle='btn--outline' onClick={clickReg}>注册</Button>
+                        <Link to = '/sign-up' className='btn-mobile'>
+                            <Button buttonStyle='btn--outline' onClick={clickReg}>注册</Button>
+                        </Link>
                     </form>
                     
                     </div>

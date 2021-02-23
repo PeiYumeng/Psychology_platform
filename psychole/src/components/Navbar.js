@@ -6,6 +6,7 @@ import './Navbar.css';
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const [button2, setButton2] = useState(true);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -13,8 +14,10 @@ function Navbar() {
   const showButton = () => {
     if (window.innerWidth <= 960) {
       setButton(false);
+      setButton2(false);
     } else {
       setButton(true);
+      setButton2(true);
     }
   };
 
@@ -69,8 +72,20 @@ function Navbar() {
                 注册
               </Link>
             </li>
+
+            <li>
+              <Link
+                to='/log-in'
+                className='nav-links-mobile'
+                onClick={closeMobileMenu}
+              >
+                登陆
+              </Link>
+            </li>
+
           </ul>
-          {button && <Button buttonStyle='btn--outline'>注册</Button>}
+          {button && <Link to = '/sign-up' className='btn-mobile'><Button buttonStyle='btn--outline'>注册</Button></Link>}
+          {button2 && <Link to = '/log-in' className='btn-mobile'><Button buttonStyle='btn--outline'>登陆</Button></Link>}
         </div>
       </nav>
     </>

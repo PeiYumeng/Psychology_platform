@@ -1,16 +1,34 @@
 .suf-container {
     background:url('/images/img-home.jpg') center center/cover no-repeat;
-    padding: 4rem 0 2rem 0;
+    padding: 1rem 0 2rem 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
+  .log-container {
+    background:url('/images/img-9.jpg') center center/cover no-repeat;
+    padding: 6rem 0 14rem 0;
+    /* padding: 6rem 0 9rem 0; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+
   .suf-box{
     background-color:rgba(0,0,0,0.4);
     border-radius:5%;
     padding: 2rem;
+  }
+
+  .suf-box-log{
+    background-color:rgba(0,0,0,0.4);
+    border-radius:5%;
+    padding: 4rem 2rem 2rem 2rem;
+    /* padding: 2rem; */
   }
   
   .suf-subscription {
