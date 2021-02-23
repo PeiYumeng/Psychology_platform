@@ -66,10 +66,10 @@ router.post('/login', function(req, res, next) {
         console.log(err);
       }else{
         console.log(result)
-        if(result.userPwd == u.userPwd){
-          res.send('登陆成功');
+        if(result[0].userPwd == u.userPwd){
+          res.send(true);
         }else{
-          res.send('用户密码信息错误');
+          res.send(false);
         }
       }
      })
