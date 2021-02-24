@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import logo_hei from '../../images/logo_hei.jpg';
 
 function LogInForm() {
-    const [signUpURL, setSignUpURL] = useState('http://132.232.126.211:8080/login');
+    const [logInURL, setLogInURL] = useState('http://132.232.126.211:8080/login');
     const [userName, setUserName] = useState('');
     const [userPwd, setUserPwd] = useState('');
     const [imgData, setImgData] = useState('');//头像的base64信息
@@ -17,7 +17,7 @@ function LogInForm() {
         if(userName=='' || userPwd ==''){
             alert('请输入用户名和密码！');
         }else{
-            fetch(signUpURL, {
+            fetch(logInURL, {
                 method: 'post', 
                 "Access-Control-Allow-Origin" : "*",
                 "Access-Control-Allow-Credentials" : true,
@@ -29,11 +29,17 @@ function LogInForm() {
                     "userPwd":userPwd,
                 })
             })
-            .then(res => res.text()) // convert to plain text
-            .then(text => console.log(text)); // then log it out
-            alert('登陆成功！\n欢迎来到Psychole心理黑洞诊疗室~');
-            window.location.href="/";
-
+            .then(res=>res.json())
+            .then(res=>{
+                {   
+                    if(res==true){
+                        alert('登陆成功！\n欢迎来到Psychole心理黑洞诊疗室~');
+                        window.location.href="/";
+                    }else{
+                        alert('用户名或密码错误！\n请再试一次');
+                    }
+                }
+            });
         }
 
     }
