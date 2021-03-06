@@ -20,15 +20,21 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-var server = http.createServer(app);
-var io = require('socket.io').listen(server);
-io.sockets.on('connection', function(socket) {
-  //  console.log(socket);
-   socket.on("join", msg => {  // 监听的频道必须和客户端监听的频道相同，等待消息
-      io.emit("aaa", "发送的信息");  // 向所有客户端发送信息
-      console.log(msg)
-  });
-});
+//创建http服务器
+const server = require('http').Server(app);
+//把socket io依附到对应创建的http服务器上
+const io = require('socket.io')(server);
+//监听设置，connection表示连接中
+io.on('connection', (socket) => {
+    //监听info客户的的info频道
+    socket.on('info', (data) => {
+         //如果收到客户端的信息，就把它设置一个json，data然后返回给客户端，使用emit
+        console.log("getmessgae")
+        console.log(data)
+        socket.emit('info', {
+            data:'qwe'
+        });
+    });})
 /**
  * Listen on provided port, on all network interfaces.
  */
