@@ -23,11 +23,11 @@ app.set('port', port);
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 io.sockets.on('connection', function(socket) {
-   console.log(socket);
-   socket.emit('aaa','ppp')
-   socket.on('disconnect', function() {
-    console.log('disconnect: ' + socket.id);
-   });
+  //  console.log(socket);
+   socket.on("join", msg => {  // 监听的频道必须和客户端监听的频道相同，等待消息
+      io.emit("aaa", "发送的信息");  // 向所有客户端发送信息
+      console.log(msg)
+  });
 });
 /**
  * Listen on provided port, on all network interfaces.
