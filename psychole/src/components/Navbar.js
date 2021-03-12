@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
+import { Avatar } from 'antd';
+import logo from '../images/logo.png';
 import './Navbar.css';
 
 function Navbar() {
@@ -32,8 +34,8 @@ function Navbar() {
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-            Psychole
-            <i class='fab fa-typo3' />
+            <Avatar size={{xs: 55, sm: 55, md: 55, lg: 55, xl: 55}} shape="circle" style={{borderRadius:'5%'}} src={logo} />
+            <div style={{marginLeft:'10px'}}><p className='nav-title1'>Psychole</p> <p className='nav-title2'>心理黑洞诊疗室</p></div>
           </Link>
           <div className='menu-icon' onClick={handleClick}>
             <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
