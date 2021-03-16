@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Navbar from './components/Navbar';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './App.css';
@@ -8,8 +8,14 @@ import Products from './components/Products/Products';
 import SignUp from './components/SignUp/SignUp';
 import LogIn from './components/SignUp/LogIn';
 import Test from './components/Test'
+import io from 'socket.io-client';
+import Socket from './socket';
+window.socket = io("ws://132.232.126.211:8080");
+Socket.prototype.users()
+
 
 function App() {
+
   return (
     <>
     <Router>

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Avatar } from 'antd';
 import logo from '../images/logo.png';
 import './Navbar.css';
+// import io from 'socket.io-client';
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -12,6 +13,18 @@ function Navbar() {
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+
+  // const socket = io("ws://132.232.126.211:8080");
+
+
+  
+  const servicesLink = {
+    pathname:"/services",
+    state:{
+      name:'Lucas',
+    }
+  };
+
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
@@ -25,6 +38,7 @@ function Navbar() {
 
   useEffect(() => {
     showButton();
+    
   }, []);
 
   window.addEventListener('resize', showButton);
@@ -48,7 +62,7 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/services'
+                to={servicesLink}
                 className='nav-links'
                 onClick={closeMobileMenu}
               >

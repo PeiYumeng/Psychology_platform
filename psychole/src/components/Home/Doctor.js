@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Avatar } from 'antd';
+import { Avatar, Button } from 'antd';
 import { Rating } from '@material-ui/lab';
-import { Button } from '../Button';
 
 function Doctor(props) {
   return (
@@ -22,7 +21,10 @@ function Doctor(props) {
           <div className='cards__item__info'>
             <h5 className='cards__item__text'>{props.text}</h5>
           </div>
-          <div className='cards_button_section'></div>
+          <div className='cards_button_section'>
+            <Button className='doc_button' size='small'>个人资料</Button>
+            <Button className='doc_button' type="primary" size='small'>通话</Button>
+          </div>
         </div>
       </li>
     </>

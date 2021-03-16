@@ -1,17 +1,19 @@
 import React from 'react';
 import './Footer.css';
+import { Avatar} from 'antd';
 import { Button } from './Button';
 import { Link } from 'react-router-dom';
+import logo from '../images/logo.png';
 
 function Footer() {
   return (
     <div className='footer-container'>
       <section className='footer-subscription'>
         <p className='footer-subscription-heading'>
-          Join the Adventure newsletter to receive our best vacation deals
+          订阅Psychole，了解最新活动！
         </p>
         <p className='footer-subscription-text'>
-          You can unsubscribe at any time.
+          您可以随时取消订阅
         </p>
         <div className='input-areas'>
           <form>
@@ -19,44 +21,44 @@ function Footer() {
               className='footer-input'
               name='email'
               type='email'
-              placeholder='Your Email'
+              placeholder='您的邮箱'
             />
-            <Button buttonStyle='btn--outline'>Subscribe</Button>
+            <Button buttonStyle='btn--outline'>订阅</Button>
           </form>
         </div>
       </section>
       <div class='footer-links'>
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
-            <h2>About Us</h2>
-            <Link to='/sign-up'>How it works</Link>
-            <Link to='/'>Testimonials</Link>
-            <Link to='/'>Careers</Link>
-            <Link to='/'>Investors</Link>
-            <Link to='/'>Terms of Service</Link>
+            <h2>关于我们</h2>
+            <Link to='/'>功能介绍</Link>
+            <Link to='/'>大咖寄语</Link>
+            <Link to='/'>职业发展</Link>
+            <Link to='/'>投资融资</Link>
+            <Link to='/'>服务条款</Link>
           </div>
           <div class='footer-link-items'>
-            <h2>Contact Us</h2>
-            <Link to='/'>Contact</Link>
-            <Link to='/'>Support</Link>
-            <Link to='/'>Destinations</Link>
-            <Link to='/'>Sponsorships</Link>
+            <h2>联系我们</h2>
+            <Link to='/'>联系方式</Link>
+            <Link to='/'>支持方式</Link>
+            <Link to='/'>公司分布</Link>
+            <Link to='/'>赞助名单</Link>
           </div>
         </div>
         <div className='footer-link-wrapper'>
           <div class='footer-link-items'>
-            <h2>Videos</h2>
-            <Link to='/'>Submit Video</Link>
-            <Link to='/'>Ambassadors</Link>
-            <Link to='/'>Agency</Link>
-            <Link to='/'>Influencer</Link>
+            <h2>加入我们</h2>
+            <Link to='/'>上传资质</Link>
+            <Link to='/'>宣传大使</Link>
+            <Link to='/'>中介机制</Link>
+            <Link to='/'>灵感提供</Link>
           </div>
           <div class='footer-link-items'>
-            <h2>Social Media</h2>
-            <Link to='/'>Instagram</Link>
-            <Link to='/'>Facebook</Link>
-            <Link to='/'>Youtube</Link>
-            <Link to='/'>Twitter</Link>
+            <h2>社交媒体</h2>
+            <Link to='/'>新浪微博</Link>
+            <Link to='/'>今日头条</Link>
+            <Link to='/'>哔哩哔哩</Link>
+            <Link to='/'>领英中国</Link>
           </div>
         </div>
       </div>
@@ -64,11 +66,11 @@ function Footer() {
         <div class='social-media-wrap'>
           <div class='footer-logo'>
             <Link to='/' className='social-logo'>
-              TRVL
-              <i class='fab fa-typo3' />
+              <Avatar size={{xs: 50, sm: 50, md: 50, lg: 50, xl: 50}} shape="circle" style={{borderRadius:'5%'}} src={logo} />
+              &nbsp;Psychole
             </Link>
           </div>
-          <small class='website-rights'>TRVL © 2020</small>
+          <small class='website-rights'>Psychole © 2021</small>
           <div class='social-icons'>
             <Link
               class='social-icon-link facebook'
