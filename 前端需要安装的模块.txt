@@ -6,3 +6,9 @@ npm install @material-ui/core --save
 npm install socket.io@2.1.0
 npm install socket.io-clienr@2.2.0
 npm i react-router --save
+
+4.6
+npm install @material-ui/icons
+npm install react-copy-to-cliboard
+npm install simple-peer
+npm install socket.io-client
