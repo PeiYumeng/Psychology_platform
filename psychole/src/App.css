@@ -6,8 +6,9 @@
   }
   
   .home,
-  .services,
-  .products,
+  .consult,
+  .broadcast,
+  .treehole,
   .sign-up {
     display: flex;
     height: 90vh;
@@ -16,7 +17,7 @@
     font-size: 3rem;
   }
   
-  .services {
+  .consult {
     background-image: url('/images/img-2.jpg');
     background-position: center;
     background-size: cover;
@@ -25,8 +26,17 @@
     font-size: 100px;
   }
   
-  .products {
+  .broadcast {
     background-image: url('/images/img-1.jpg');
+    background-position: center;
+    background-size: fill;
+    background-repeat: no-repeat;
+    color: #fff;
+    font-size: 100px;
+  }
+
+  .treehole {
+    background-image: url('/images/img-3.jpg');
     background-position: center;
     background-size: fill;
     background-repeat: no-repeat;

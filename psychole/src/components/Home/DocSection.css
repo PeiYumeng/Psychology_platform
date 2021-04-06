@@ -1,28 +1,34 @@
 .cards {
-    padding: 4rem 3rem 4rem 3rem;
-    background: #fff;
+    position:relative;
+    background: #ffffff;
+    width:100%;
   }
   
   h1 {
     text-align: center;
   }
   
+  .bigger_container{
+    background-color:#eeeeee;
+    padding: 0rem 3rem 0rem 3rem;
+  }
+
   .cards__container {
     display: flex;
-    flex-flow: column;
     align-items: center;
-    max-width: 1120px;
+    max-width: 1200px;
     width: 90%;
     margin: 0 auto;
   }
   
   .cards__wrapper {
     position: relative;
-    margin: 50px 0 45px;
+    margin: 45px 0 10px;
   }
   
   .cards__items {
-    margin-bottom: 24px;
+    display:flex;
+    flex-wrap:wrap;
   }
   
   .cards__item {
@@ -33,10 +39,12 @@
   }
   
   .cards__item__link {
-    display: flex;
+    display:inline-block;
+    padding:5px 5px 5px 10px;
     padding-bottom: 30px;
-    flex-flow: column;
-    width: 100%;
+    margin-bottom:30px;
+    width: 250px;
+    background:#ffffff;
     box-shadow: 0 6px 20px rgba(56, 125, 255, 0.17);
     -webkit-filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
     filter: drop-shadow(0 6px 20px rgba(56, 125, 255, 0.017));
@@ -49,7 +57,7 @@
     position: relative;
     width: 100%;
     padding-top: 25px;
-    padding-left: 12px;
+    padding-left: 15px;
     overflow: hidden;
   }
   
@@ -61,7 +69,7 @@
   .doc_infor{
     position:absolute;
     color:black;
-    left: 97px;
+    left: 102px;
     top:25px;
     width:52%;
     height:40px;
@@ -76,7 +84,7 @@
     line-height: 25px;
     right: 5px;
     top:15px;
-    width:25%;
+    width:70px;
     height:25px;
     margin:0;
     /* background-color:yellow; */
@@ -86,13 +94,14 @@
     content: attr(data-category);
     position: absolute;
     bottom: 0;
-    margin-left: 10px;
+    margin-left: 13px;
     padding: 3px 4px;
     max-width: calc((100%) - 60px);
     font-size: 10px;
     font-weight: 700;
     color: #fff;
-    background-color: #1f98f4;
+    background-color: rgba(10, 10, 255, 0.4);
+    
     box-sizing: border-box;
   }
   
@@ -123,14 +132,15 @@
     color: #252e48;
     font-size: 14px;
     line-height: 20px;
+    padding:0 0 3px 0;
   }
 
   .cards_button_section{
     position:absolute;
     color:black;
-    left: 97px;
+    right: 5px;
     bottom:18px;
-    width:60%;
+    width:150px;
     height:40px;
     margin:0;
     /* background-color:yellow; */
@@ -138,10 +148,44 @@
   }
 
   .doc_button{
-    margin:3px;
+    margin:4px;
+  }
+  
+  .docs__infor__pic-wrap {
+    position: relative;
+    width: 100%;
+    /* background-color: yellow; */
+    overflow: hidden;
+  }
+
+  .doc_infor_detail{
+    position:absolute;
+    color:black;
+    left: 130px;
+    top:5px;
+    width:52%;
+    height:90%;
+    margin:0;
+    /* background-color:pink; */
+  }
+
+  .doc_location_detail{
+    font-size:13px;
+    line-height: 25px;
+    width:100%;
+    height:25px;
+    margin:0;
   }
 
   
+  @media only screen and (min-width: 600px) {
+    .content__blog__container {
+      width: 84%;
+    }
+    
+  }
+
+
   @media only screen and (min-width: 1200px) {
     .content__blog__container {
       width: 84%;
@@ -154,14 +198,63 @@
       display: flex;
     }
 
-    .menu_container{
-      padding-left:10em;
-      padding-right:10em;
+    .menu_title{
+      position:absolute;
+      margin-top: 0.2em;
+      left:9em;
     }
+
+    .menu_container{
+      padding-left:18em;
+    }
+
+    .filter_container{
+      padding-left:13em;
+    }
+
+    .search_container{
+      position:absolute;
+      right:15em;
+      top:0.5em;
+    }
+
   }
+  
   
   @media only screen and (max-width: 1024px) {
     .cards__item {
       margin-bottom: 2rem;
     }
+
+    .menu_title{
+      position:absolute;
+      margin-top: 0.2em;
+      left:3em;
+    }
+    
+    .menu_container{
+      padding-left:8em;
+    }
+
+    .filter_container{
+      display: flex;
+      align-items: center;
+      width: 80%;
+      padding-left:2%;
+      margin: 0 auto;
+    }
+
+    .search_container{
+      text-align: center;
+      width: 70%;
+      padding-bottom: 1em;
+      margin:0 auto;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .cards__item {
+      margin-bottom: 2rem;
+    }
+
   }

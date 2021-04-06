@@ -14,6 +14,16 @@ function LogInForm() {
     const [userImg, setUserImg] = useState('');//数据库内头像名称
     const [avatarDIY, setAvatarDIY] = useState(false);
 
+    const logSucceed = (userData, callback) =>{
+        console.log(userData);
+        callback();
+    }
+
+    const backToHome = () =>{
+        alert('登陆成功！\n欢迎来到Psychole心理黑洞诊疗室~');
+        window.location.href="/";
+    }
+
     const clickLog = () => {
         if(userName=='' || userPwd ==''){
             alert('请输入用户名和密码！');
@@ -33,11 +43,11 @@ function LogInForm() {
             .then(res=>res.json())
             .then(res=>{
                 {   
-                    if(res==true){
+                    if(res!=false){
+                        logSucceed(res[0], backToHome);
                         localStorage.setItem("userName", userName)
                         Socket.prototype.join(userName);
-                        alert('登陆成功！\n欢迎来到Psychole心理黑洞诊疗室~');
-                        window.location.href="/";
+                        
                     }else{
                         alert('用户名或密码错误！\n请再试一次');
                     }
@@ -52,6 +62,7 @@ function LogInForm() {
     }, []);
     
     return (
+        
         <div className='log-container'>
             <div className="suf-box-log">
                 <section className='suf-subscription'>

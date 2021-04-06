@@ -4,16 +4,18 @@ import {Carousel} from 'antd';
 import { Button } from '../Button';
 import '../HeroSection.css';
 
-const broImage1 = "url('/images/img-home.jpg') center center/cover no-repeat";
+const broImage1 = "url('/images/cover1.jpg') center center/cover no-repeat";
 const broImage2 = "url('/images/img-1.jpg') center center/cover no-repeat";
 const broImage3 = "url('/images/img-2.jpg') center center/cover no-repeat";
 const broImage4 = "url('/images/img-8.jpg') center center/cover no-repeat";
 const broImage5 = "url('/images/img-9.jpg') center center/cover no-repeat";
 
 const contentStyle = (broImage) => {
-  return{height: '25rem',
+  return{height: '14em',
+  fontSize:'30px',
   color: '#fff',
-  lineHeight: '25rem',
+  textShadow:'2px 2px 2px #555555',
+  lineHeight: '14em',
   letterSpacing: '5px',
   textAlign: 'center',
   background: broImage,};
@@ -24,7 +26,7 @@ function AdverSection() {
     <div>
       <Carousel autoplay>
         <div>
-          <h1 style={contentStyle(broImage1)}>体验Psychole新功能</h1>
+          <h1 style={contentStyle(broImage1)}>Psychole平台使用指南</h1>
         </div>
         <div>
           <h1 style={contentStyle(broImage2)}>加入Psychole大家庭</h1>

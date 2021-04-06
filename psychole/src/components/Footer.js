@@ -75,7 +75,6 @@ function Footer() {
             <Link
               class='social-icon-link facebook'
               to='/'
-              target='_blank'
               aria-label='Facebook'
             >
               <i class='fab fa-facebook-f' />
@@ -83,7 +82,6 @@ function Footer() {
             <Link
               class='social-icon-link instagram'
               to='/'
-              target='_blank'
               aria-label='Instagram'
             >
               <i class='fab fa-instagram' />
@@ -91,7 +89,6 @@ function Footer() {
             <Link
               class='social-icon-link youtube'
               to='/'
-              target='_blank'
               aria-label='Youtube'
             >
               <i class='fab fa-youtube' />
@@ -99,7 +96,6 @@ function Footer() {
             <Link
               class='social-icon-link twitter'
               to='/'
-              target='_blank'
               aria-label='Twitter'
             >
               <i class='fab fa-twitter' />
@@ -107,7 +103,6 @@ function Footer() {
             <Link
               class='social-icon-link twitter'
               to='/'
-              target='_blank'
               aria-label='LinkedIn'
             >
               <i class='fab fa-linkedin' />
