@@ -9,6 +9,6 @@ npm i react-router --save
 
 4.6
 npm install @material-ui/icons
-npm install react-copy-to-cliboard
+npm install react-copy-to-clipboard
 npm install simple-peer
 npm install socket.io-client
