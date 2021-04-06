@@ -22,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // 中间件，指明静态资源的路径，所有的静态资源请求例如图片、js脚本、css样式，都回去该目录下查找资源
+// app.use(express.static(path.join(static, 'camera')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

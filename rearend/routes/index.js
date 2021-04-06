@@ -9,6 +9,7 @@ var funcs = require('./fonction.js');
 var con = mysql.createConnection(dbconfig);// 创建连接
 con.connect();//链接
 var io = require('socket.io');
+var app = require('../app.js')
 /* 显示图片*/
 router.get('/images/:photo', function(req, res) {
   var photo = req.params.photo;
@@ -67,13 +68,28 @@ router.post('/login', function(req, res, next) {
       }else{
         console.log(result)
         if(result[0].userPwd == u.userPwd){
-          res.send(true);
+          res.send(result);
         }else{
           res.send(false);
         }
       }
      })
 })
+
+/* 向前端发送指定用户信息*/
+router.post('/userInfor', function(req, res, next) {
+  var u = req.body;
+  console.log(u);
+  con.query("select * from Users where userName =?;",[u.userName],function(err,result){
+      if(err){
+        console.log(err);
+      }else{
+        console.log(result[0]);
+        res.send(result[0]);
+      }
+     })
+})
+
 /* 提交认证 */
 router.post('/authentication', function(req, res, next) {
   var u = req.body;
@@ -106,13 +122,44 @@ router.post('/authentication', function(req, res, next) {
     if(err){
       console.log(err);
     }else{
-      console.log(result)
+      // console.log(result)
       res.send('插入数据成功'); 
     }
    })
 })
 /* 判断用户是否在线 */
-
+/* 向前端发送线下医生列表*/
+router.get('/doctor_offline', function(req, res, next) {
+  con.query("select * from Doctors,Users where  Doctors.userId = Users.userId",function(err,result){
+    if(err){
+      console.log(err);
+    }else{
+      var arr = [];
+      for(var i = 0;i<result.length;i++){
+        if(result[i].docHop != null){
+          arr.push(result[i])
+        }
+      }
+      // console.log(arr);
+      res.send(arr);
+    }
+   })
+})
+/* 向前端发送线上医生列表*/
+router.get('/doctor_online', function(req, res, next) {
+  con.query("select * from Doctors,Users where Doctors.userId = Users.userId;",function(err,result){//全部医生
+    if(err){
+      console.log(err);
+    }else{
+      // console.log(result);
+      res.send(result)
+    }
+   })
+})
+// router.get('/doctor_online2', function(req, res, next) {
+//   console.log(global.doc_online)
+//   res.send(global.doc_online)
+// })
 /* 后台管理系统检查资格认证 */
 router.post('/manage_authentication', function(req, res, next) {
   con.query("select * from Doctors,Users where userState =1;",function(err,result){//?

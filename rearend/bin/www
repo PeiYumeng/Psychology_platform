@@ -8,6 +8,9 @@ var app = require('../app');
 var debug = require('debug')('rearend:server');
 var http = require('http');
 
+// 设置全局变量
+global.doc_online=[];
+
 // io.getSocketio(server);
 // var io = require('../routes/socketio.js');
 /**
@@ -23,18 +26,29 @@ app.set('port', port);
 //创建http服务器
 const server = require('http').Server(app);
 //把socket io依附到对应创建的http服务器上
-const io = require('socket.io')(server);
+const io = require('socket.io')(server, { cors: true });
+// 'Access-Control-Allow-Origin' :'*'
 //监听设置，connection表示连接中
 io.on('connection', (socket) => {
     //监听info客户的的info频道
-    socket.on('info', (data) => {
-         //如果收到客户端的信息，就把它设置一个json，data然后返回给客户端，使用emit
-        console.log("getmessgae")
-        console.log(data)
-        socket.emit('info', {
-            data:'qwe'
-        });
-    });})
+    var u_id;
+    socket.on('join',(data)=>{
+      console.log('有用户上线了')
+      if(global.doc_online.indexOf(data) == -1){//不重复添加用户信息
+        global.doc_online.push(data);
+        u_id=data; 
+      }
+      console.log(global.doc_online)
+    })
+    socket.on('info', (data) => { 
+      socket.emit('users',global.doc_online)
+    });
+    socket.on('disconnect', () => {
+      console.log('后端失去连接')
+      global.doc_online.splice(global.doc_online.findIndex(e => e === u_name), 1) 
+      console.log(global.doc_online)
+    })
+})
 /**
  * Listen on provided port, on all network interfaces.
  */
