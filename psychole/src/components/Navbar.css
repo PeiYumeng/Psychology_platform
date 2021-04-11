@@ -88,6 +88,33 @@
   display: none;
 }
 
+.docs__infor__pic-wrap {
+  position: relative;
+  width: 100%;
+  /* background-color: yellow; */
+  overflow: hidden;
+}
+
+.doc_infor_detail{
+  position:absolute;
+  color:black;
+  left: 130px;
+  top:5px;
+  width:52%;
+  height:90%;
+  margin:0;
+  /* background-color:pink; */
+}
+
+.doc_location_detail{
+  font-size:13px;
+  line-height: 25px;
+  width:100%;
+  height:25px;
+  margin:0;
+}
+
+
 
 
 @media screen and (max-width: 960px) {

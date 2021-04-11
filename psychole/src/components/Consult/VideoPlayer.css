@@ -1,0 +1,26 @@
+.videos_container{
+    margin-top:30px;
+}
+
+.video_container{
+    margin-bottom:10px;
+    
+}
+
+.my_video{
+    border-radius: 5px;
+    z-index:100;
+    width:30em;
+    height:16.8em;
+    box-shadow: 0 6px 20px rgba(56, 56, 56, 0.3);
+    transform: rotateY(180deg);
+    
+}
+
+@media only screen and (max-width: 600px) {
+    video {
+        width:300px;
+        height:168px;
+    }
+
+  }

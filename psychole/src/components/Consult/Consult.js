@@ -8,9 +8,9 @@ export default function Consult(userData) {
     // console.log(location.state);
     return (
         <>
-            <h3 className='consult'>你好，{location.state.userData.userName}</h3>
-            {/* <p></p>
-            <DocSection /> */}
+            {/* <h3 className='consult'>你好，{location.state.userData.userName}</h3> */}
+            <p></p>
+            <DocSection />
         </>
     );
 }

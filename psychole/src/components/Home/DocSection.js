@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Menu, Dropdown, Button, Input, Space} from 'antd';
 import './DocSection.css';
 import Doctor from './Doctor';
 import {useLocation} from 'react-router';
+import { SocketContext } from '../../SocketContext';
 
 function DocSection() {
+  const { userData, users } = useContext(SocketContext);
   const userlocation = useLocation();
 
   const [initFlag, setInitFlag] = useState(true);//初次渲染的标志
@@ -17,12 +19,12 @@ function DocSection() {
   const [locateTitle, setLocateTitle] = useState('所在地');
   const [searchValue, setSearchValue] = useState('');
   const [blueButton, setBlueButton] = useState('通话');
-  const [userData, setUserData] = useState({});
+
 
   const [offlineURL, setOfflineURL] = useState('http://132.232.126.211:8080/doctor_offline');
   const [onlineURL, setOnlineURL] = useState('http://132.232.126.211:8080/doctor_online');
-  const [userURL, setUserURL] = useState('http://132.232.126.211:8080/userInfor');
-
+ 
+  const [allDoctor, setAllDoctor] = useState([]);
   const [onDoctor, setOnDoctor] = useState([]);
   const [onDoctorLast, setOnDoctorLast] = useState([]);//线上医生中不属于线上的
   const [offDoctor, setOffDoctor] = useState([]);
@@ -136,8 +138,8 @@ function DocSection() {
     var docArr = [];
     for(var i=0;i<doc.length;i++){
       var docTitle='';
-      if(doc[i].userProCity.indexOf('河北')!=-1){docTitle+='同省份;'}
-      if(doc[i].userProCity.indexOf('石家庄')!=-1){docTitle+='同城市;'}
+      if(doc[i].userProCity.indexOf(userData.userProCity.split(';')[0])!=-1){docTitle+='同省份;'}
+      if(doc[i].userProCity.indexOf(userData.userProCity.split(';')[1])!=-1){docTitle+='同城市;'}
       if(doc[i].userProCity.indexOf('北京')!=-1||doc[i].userProCity.indexOf('天津')!=-1||doc[i].userProCity.indexOf('河北')!=-1){docTitle+='京津冀;'}
       if(doc[i].userProCity.indexOf('江苏')!=-1||doc[i].userProCity.indexOf('浙江')!=-1||doc[i].userProCity.indexOf('上海')!=-1){docTitle+='江浙沪;'}
       if(doc[i].userProCity.indexOf('黑龙江')!=-1||doc[i].userProCity.indexOf('吉林')!=-1||doc[i].userProCity.indexOf('辽宁')!=-1){docTitle+='东三省;'}
@@ -164,46 +166,41 @@ function DocSection() {
     setDocLastResult(docLastArr);
 }
 
-
-  useEffect(() => {
+  useEffect(()=>{
 
     fetch(offlineURL)
-        .then(res=>res.json())
+      .then(res=>res.json())
         .then(res=>{
           setOffDoctor(res);
         });
-    
+
     fetch(onlineURL)
-        .then(res=>res.json())
+      .then(res=>res.json())
         .then(res=>{
-          setOnDoctor(res);
-          if (initFlag) {
-            setDocResult(res);
-            setDocLastResult([]);
-          }//初次渲染
-          setInitFlag(false);
+          setAllDoctor(res);
         });
 
-    fetch(userURL, {
-      method: 'post', 
-      "Access-Control-Allow-Origin" : "*",
-      "Access-Control-Allow-Credentials" : true,
-      headers: {
-          'Content-Type': 'application/json;charset=UTF-8'
-      },
-      body: JSON.stringify({
-          "userName": window.localStorage.userName,
-      })
-    })
-    .then(res=>res.json())
-    .then(res=>{
-        {   
-            if(res.userName!=null){
-              setUserData(res);
-            }else{}
-        }
-    });
 
+  }, [])
+
+
+  useEffect(() => {
+
+    var arrOn = [];
+    var arrLast = [];
+    var i=0;
+    for(; i<allDoctor.length ;i++){
+      var j=0;
+      for(; j<users.length ;j++){
+        if(allDoctor[i].userId == users[j].userId && users[j].isInRoom==false){
+          arrOn.push(allDoctor[i]); break;
+        }
+      }
+      if(j==users.length){arrLast.push(allDoctor[i]);}
+    }
+    setOnDoctor(arrOn);
+    setOnDoctorLast(arrLast);
+  
 
     if(current=='online'){
       setDocResult(onDoctor);
@@ -220,9 +217,9 @@ function DocSection() {
 
     }
 
-    
 
-  }, [current, docGender, docField, docLocate, searchValue]);
+  }, [current, docGender, docField, docLocate, searchValue, users]);
+
 
   
   return (
@@ -258,7 +255,7 @@ function DocSection() {
             <ul className='cards__items'>
             {
               docResult.map((item)=>(
-                <Doctor name={item.userName} avatar={item.userImg} prov={item.userProCity.split(';')[0]} location={item.userProCity.split(';')[1]} cert={item.docCert} score={item.docScore} text={item.userIntro} docHop={item.docHop} docEdu={item.docEdu} docWell={item.docWell} docHour={item.docHour} userTel={item.userTel} eduImg={item.docEduimg} certImg={item.docCertimg} resume={item.docResume} blueButton={blueButton} setBlueButton={setBlueButton} userData={userData}/>
+                <Doctor name={item.userName} avatar={item.userImg} prov={item.userProCity.split(';')[0]} location={item.userProCity.split(';')[1]} cert={item.docCert} score={item.docScore} text={item.userIntro} docHop={item.docHop} docEdu={item.docEdu} docWell={item.docWell} docHour={item.docHour} userTel={item.userTel} eduImg={item.docEduimg} certImg={item.docCertimg} resume={item.docResume} blueButton={blueButton} setBlueButton={setBlueButton} userData={userData} userId={item.userId}/>
               ))
             }
             </ul>

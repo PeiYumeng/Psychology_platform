@@ -9,7 +9,8 @@ var debug = require('debug')('rearend:server');
 var http = require('http');
 
 // 设置全局变量
-global.doc_online=[];
+// global.doc_online=[];
+const {users, addUser, removeUser, getUser} = require('./users.js');
 
 // io.getSocketio(server);
 // var io = require('../routes/socketio.js');
@@ -30,24 +31,38 @@ const io = require('socket.io')(server, { cors: true });
 // 'Access-Control-Allow-Origin' :'*'
 //监听设置，connection表示连接中
 io.on('connection', (socket) => {
-    //监听info客户的的info频道
-    var u_id;
-    socket.on('join',(data)=>{
-      console.log('有用户上线了')
-      if(global.doc_online.indexOf(data) == -1){//不重复添加用户信息
-        global.doc_online.push(data);
-        u_id=data; 
-      }
-      console.log(global.doc_online)
-    })
-    socket.on('info', (data) => { 
-      socket.emit('users',global.doc_online)
+    socket.emit("me", socket.id);
+
+    socket.on('join', ({ userId, status, isInRoom}, callback) => {
+      const { error, user } = addUser({ id: socket.id, userId, status, isInRoom});
+      const timer = setInterval(()=>{  
+        socket.emit("users", users);
+      },1000)
+      // socket.emit("users", users);
+      console.log(users);
+      if(error) return callback(error);
+      // socket.join(user.room);
+      callback();
     });
+
+
     socket.on('disconnect', () => {
-      console.log('后端失去连接')
-      global.doc_online.splice(global.doc_online.findIndex(e => e === u_name), 1) 
-      console.log(global.doc_online)
-    })
+      const user = removeUser(socket.id);
+      console.log(users);
+      // console.log('后端失去连接')
+      // global.doc_online.splice(global.doc_online.findIndex(e => e === u_name), 1) 
+      // console.log(global.doc_online)
+
+      socket.broadcast.emit("callEnded")
+    });
+    socket.on("callUser", ({ userToCall, signalData, from, name }) => {
+      io.to(userToCall).emit("callUser", { signal: signalData, from, name });
+      // console.log(userToCall);
+    });
+    socket.on("answerCall", (data) => {
+      io.to(data.to).emit("callAccepted", data.signal);
+      console.log('已发送给'+data.to);
+    });
 })
 /**
  * Listen on provided port, on all network interfaces.

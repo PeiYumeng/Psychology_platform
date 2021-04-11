@@ -4,7 +4,7 @@ import './SignUpForm.css';
 import { Button } from '../Button';
 import { Link } from 'react-router-dom';
 import logo_hei from '../../images/logo_hei.jpg';
-import Socket from '../../socket';
+// import Socket from '../../socket';
 
 function LogInForm() {
     const [logInURL, setLogInURL] = useState('http://132.232.126.211:8080/login');
@@ -46,7 +46,7 @@ function LogInForm() {
                     if(res!=false){
                         logSucceed(res[0], backToHome);
                         localStorage.setItem("userName", userName)
-                        Socket.prototype.join(userName);
+                        // Socket.prototype.join(userName);
                         
                     }else{
                         alert('用户名或密码错误！\n请再试一次');

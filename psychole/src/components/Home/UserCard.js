@@ -7,10 +7,7 @@ function UserCard(props) {
 
   useEffect(() => {
     if(props.status==2){
-      if(props.cert==1){setDocCert('一级心理咨询师')}
-      else if(props.cert==2){setDocCert('二级心理咨询师')}
-      else if(props.cert==3){setDocCert('三级心理咨询师')}
-      else{setDocCert('心理咨询师');console.log(props.status)};
+      setDocCert('认证心理咨询师');
     }
     else if(props.status==1){setDocCert('认证中');}
     else{

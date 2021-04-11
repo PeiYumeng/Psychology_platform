@@ -66,7 +66,7 @@ router.post('/login', function(req, res, next) {
       if(err){
         console.log(err);
       }else{
-        console.log(result)
+        // console.log(result)
         if(result[0].userPwd == u.userPwd){
           res.send(result);
         }else{
@@ -84,7 +84,7 @@ router.post('/userInfor', function(req, res, next) {
       if(err){
         console.log(err);
       }else{
-        console.log(result[0]);
+        // console.log(result[0]);
         res.send(result[0]);
       }
      })
