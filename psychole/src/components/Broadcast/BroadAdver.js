@@ -4,14 +4,17 @@ import {Carousel} from 'antd';
 import { Button } from '../Button';
 import '../HeroSection.css';
 
-const broImage1 = "url('/images/cover1.jpg') center center/cover no-repeat";
-const broImage2 = "url('/images/img-1.jpg') center center/cover no-repeat";
-const broImage3 = "url('/images/img-2.jpg') center center/cover no-repeat";
-const broImage4 = "url('/images/img-8.jpg') center center/cover no-repeat";
-const broImage5 = "url('/images/img-9.jpg') center center/cover no-repeat";
+const broImage1 = "url('/images/broad_cover1.jpg') center center/cover no-repeat";
+const broImage2 = "url('/images/broad_cover2.jpg') center center/cover no-repeat";
+const broImage3 = "url('/images/broad_cover3.jpg') center center/cover no-repeat";
+const broImage4 = "url('/images/broad_cover4.jpg') center center/cover no-repeat";
+const broImage5 = "url('/images/cover-3.jpg') center center/cover no-repeat";
 
 const contentStyle = (broImage) => {
-  return{height: '14em',
+  return{
+  width:'70%',
+  height: '0',
+  paddingTop:'56.25%',
   fontSize:'30px',
   color: '#fff',
   textShadow:'2px 2px 2px #555555',
@@ -26,19 +29,19 @@ function BroadAdver() {
     <div>
       <Carousel autoplay>
         <div>
-          <h1 style={contentStyle(broImage1)}>Psychole平台使用指南</h1>
+          <h1 style={contentStyle(broImage1)}></h1>
         </div>
         <div>
-          <h1 style={contentStyle(broImage2)}>加入Psychole大家庭</h1>
+          <h1 style={contentStyle(broImage2)}></h1>
         </div>
         <div>
-          <h1 style={contentStyle(broImage3)}>参与Psychole认证</h1>
+          <h1 style={contentStyle(broImage3)}></h1>
         </div>
         <div>
-          <h1 style={contentStyle(broImage4)}>直播活动1</h1>
+          <h1 style={contentStyle(broImage4)}></h1>
         </div>
         <div>
-          <h1 style={contentStyle(broImage5)}>直播活动2</h1>
+          <h1 style={contentStyle(broImage5)}></h1>
         </div>
       </Carousel>
     </div>
