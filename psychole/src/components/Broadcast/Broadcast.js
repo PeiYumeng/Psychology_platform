@@ -1,6 +1,22 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import '../../App.css';
+import BroadAdver from './BroadAdver';
+// import DocSection from './DocSection';
+import { SocketContext } from '../../SocketContext';
 
-export default function Broadcast() {
-    return <h1 className='broadcast'>名医直播</h1>;
+function Broadcast (){
+    const { setHasUser, setOnlyShowRoom } = useContext(SocketContext);
+
+    useEffect(()=>{
+
+    }, []);
+
+    return(
+        <>
+            <BroadAdver />
+            {/* <DocSection /> */}
+        </>
+    )
 }
+
+export default Broadcast;

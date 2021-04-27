@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
-import { Upload } from 'antd';
-import { Button } from '../Button';
+import { Button, Upload } from 'antd';
 import ImgCrop from 'antd-img-crop';
 
-const Avatar = ({fileList, setFileList, setAvatarDIY, setImgData}) => {
+const MyAvatar = ({ avatarSRC }) => {
+
+  const [imgData, setImgData] = useState('');
+  const [fileList, setFileList] = useState([
+    {
+      uid: '-1',
+      name: 'image.png',
+      status: 'done',
+      url: avatarSRC,
+    },
+  ]);
   
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);
-    setAvatarDIY(true);
     if(newFileList[0]){
       setImgData(newFileList[0].thumbUrl);
     }
@@ -31,25 +39,22 @@ const Avatar = ({fileList, setFileList, setAvatarDIY, setImgData}) => {
   };
 
   return (
-    <>
-      <ImgCrop rotate>
-        <Upload
-          action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-          id="avatar"
-          listType="picture-card"
-          fileList={fileList}
-          onChange={onChange}
-          onPreview={onPreview}
-        >
-          {fileList.length < 1 && '+ Upload'}
-        </Upload>
-      </ImgCrop>
-      <form style={{color:'white'}}>
-        {/* 默认头像&nbsp;&nbsp; */}
-        {/* <Button buttonStyle='btn--outline'>替换头像</Button> */}
-      </form>
-    </>
+    // <div style={{textAlign:'center'}}>
+    <ImgCrop rotate>
+      <Upload
+        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        id="avatar"
+        listType="picture-card"
+        fileList={fileList}
+        onChange={onChange}
+        onPreview={onPreview}
+      >
+        {fileList.length < 1 && '+ Upload'}
+      </Upload>
+    </ImgCrop>
+    //   <Button type="primary" size='medium' style={{marginTop:'1em'}}>上传</Button>
+    // </div>
   );
 };
 
-export default Avatar
+export default MyAvatar

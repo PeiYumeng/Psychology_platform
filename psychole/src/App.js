@@ -9,6 +9,7 @@ import Treehole from './components/Treehole/Treehole';
 import SignUp from './components/SignUp/SignUp';
 import LogIn from './components/SignUp/LogIn';
 import ConsultRoom from './components/Consult/ConsultRoom';
+import Me from './components/Me/Me';
 import { SocketContext } from './SocketContext';
 
 
@@ -34,6 +35,7 @@ function App() {
           <Route path='/sign-up' exact component={SignUp} />
           <Route path='/log-in' exact component={LogIn} />
           <Route path='/consultroom/:room' exact component={ConsultRoom} />
+          <Route path='/me' exact component={Me} />
       </Switch>
     </Router>
     </>

@@ -10,6 +10,7 @@
   
   .bigger_container{
     background-color:#eeeeee;
+    min-height:50vh;
     padding: 0rem 3rem 0rem 3rem;
   }
 

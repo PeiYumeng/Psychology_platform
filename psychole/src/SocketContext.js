@@ -84,6 +84,7 @@ const ContextProvider = ({ children }) => {
           });
         }else{
           socket.emit('join', { userId, status, isInRoom }, (error) => {
+            console.log('咔咔');
             if(error) {
               alert(error);
             }

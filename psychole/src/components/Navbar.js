@@ -70,7 +70,7 @@ function Navbar() {
   }
 
   const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => {setClick(false); console.log(window.localStorage)}
+  const closeMobileMenu = () => {setClick(false);}
 
   const showButton = () => {
     if (window.innerWidth <= 960) {
@@ -109,10 +109,10 @@ function Navbar() {
   const avatarChoice = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" >个人资料</a>
+        <Link to='/me'><a target="_blank" rel="noopener noreferrer" style={{color:'black'}}>个人资料</a></Link>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" onClick={()=>{alert('退出成功！欢迎再度光临！');window.localStorage.clear();window.location.href="/";}}>退出登录</a>
+        <a style={{color:'black'}} target="_blank" rel="noopener noreferrer" onClick={()=>{alert('退出成功！欢迎再度光临！');window.localStorage.clear();window.location.href="/";}}>退出登录</a>
       </Menu.Item>
  
     </Menu>
@@ -170,7 +170,7 @@ function Navbar() {
             {/* <Avatar size={{xs: 40, sm: 40, md: 40, lg: 40, xl: 40}} shape="square" style={{borderRadius:'5%'}} src={"http://132.232.126.211:8080/images/"+userData.userImg} /> */}
           </div>
           <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            {userAvatarM && <div className='card_box'><UserCard name={userData.userName} avatar={userData.userImg} location={userData.userProCity} cert={userData.docCert} status={userData.userState} creditScore={userData.userScore}/></div>}
+            {userAvatarM && <div className='card_box'><UserCard name={userData.userName} avatar={userData.userImg} location={userData.userProCity} cert={userData.docCert} status={userData.userState} creditScore={userData.userScore} setClick={setClick}/></div>}
 
             <li className='nav-item'>
               <Link to='/' className='nav-links' onClick={closeMobileMenu}>

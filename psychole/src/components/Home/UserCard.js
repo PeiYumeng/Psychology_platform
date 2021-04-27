@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, Button} from 'antd';
+import { Link } from 'react-router-dom';
 
 function UserCard(props) {
 
   const [docCert, setDocCert] = useState('');
 
   useEffect(() => {
-    if(props.status==2){
-      setDocCert('认证心理咨询师');
-    }
-    else if(props.status==1){setDocCert('认证中');}
-    else{
-      setDocCert('普通用户');
-    }
+    if(props.cert==1){setDocCert('一级心理咨询师')}
+    else if(props.cert==2){setDocCert('二级心理咨询师')}
+    else if(props.cert==3){setDocCert('三级心理咨询师')}
+    else{setDocCert('普通用户')};
   
   }, []);
 
@@ -35,8 +33,8 @@ function UserCard(props) {
             <h5 className='cards__item__text2'>{props.text}</h5>
           </div> */}
           <div className='cards_button_section2'>
-            <Button ghost onClick={()=>{}} className='doc_button2' size='small'>个人资料</Button>
-            <Button ghost onClick={()=>{window.localStorage.clear();window.location.reload();}} className='doc_button2' size='small'>退出</Button>
+            <Link to='/me'><Button ghost onClick={()=>{props.setClick(false);}} className='doc_button2' size='small'>个人资料</Button></Link>
+            <Button ghost onClick={()=>{alert('退出成功！欢迎再度光临！');window.localStorage.clear();window.location.href="/";}} className='doc_button2' size='small'>退出</Button>
           </div>    
         </div>
       </li>

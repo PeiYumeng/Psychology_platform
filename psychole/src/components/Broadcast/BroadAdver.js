@@ -21,7 +21,7 @@ const contentStyle = (broImage) => {
   background: broImage,};
 };
 
-function AdverSection() {
+function BroadAdver() {
   return (
     <div>
       <Carousel autoplay>
@@ -45,4 +45,4 @@ function AdverSection() {
   );
 }
 
-export default AdverSection;
+export default BroadAdver;

@@ -18,7 +18,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-    video {
+    .my_video {
         width:300px;
         height:168px;
     }

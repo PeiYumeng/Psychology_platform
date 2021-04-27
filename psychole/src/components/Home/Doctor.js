@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import { Avatar, Modal, Button, Divider, Tag, Image } from 'antd';
 import { Rating } from '@material-ui/lab';
-import {Typography, AppBar} from '@material-ui/core';
 import { SocketContext } from '../../SocketContext';
 
 import VideoPlayer from '../Consult/VideoPlayer';
-import Notifications from '../Consult/Notifications';
-import Options from '../Consult/Options';
 
 function Doctor(props) {
   const { setCallerUserId , callUser , setCameraOn, users, setCall} = useContext(SocketContext);
